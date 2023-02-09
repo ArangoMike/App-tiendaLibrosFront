@@ -5,9 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
-import { LobbyComponent } from './paginas/lobby/lobby.component';
-import { TiendaComponent } from './paginas/tienda/tienda.component';
-import { CarritoComponent } from './paginas/carrito/carrito.component';
+import { LobbyComponent } from './pages/lobby/lobby.component';
+import { ShopComponent } from './pages/shop/shop.component';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { ShoppingCartComponent } from './pages/shoppingCart/shoppingCart.component';
 
 @NgModule({
   declarations: [
@@ -15,11 +16,12 @@ import { CarritoComponent } from './paginas/carrito/carrito.component';
     NavbarComponent,
     FooterComponent,
     LobbyComponent,
-    TiendaComponent,
-    CarritoComponent
+    ShopComponent,
+    ShoppingCartComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [],
