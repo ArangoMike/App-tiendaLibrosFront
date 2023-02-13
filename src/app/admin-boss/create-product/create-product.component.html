@@ -1,0 +1,147 @@
+
+<section class="">
+ 
+    <div class="px-4  py-5 px-md-5 text-center text-lg-start" style="background-color: hsl(0, 0%, 96%)">
+      <div class="container">
+        <div class="row gx-lg-5   align-items-center">
+          
+          <div class="col-lg-6 mb-5 mb-lg-0 ">
+  
+            
+            
+            <div class="d-flex justify-content-center mb-4">
+            <h1 class=" display-3 fw-bold ls-tight ">
+             Ingresar nuevo
+            </h1>
+          </div>
+            <div class="d-flex justify-content-center mb-4" style=>
+            <h1 class=" display-3 fw-bold ls-tight ">
+             
+              <span class="text-primary">Producto</span>
+            </h1>
+          </div>
+            <p style="color: hsl(217, 10%, 50.8%)">
+              Esta sección es altamente sencible, porfavor, abstengase de crear
+              si no es un administrador de la pagina, trabajamos para tener login
+              de usuarios y manejo adecuado de los datos.
+              Sí usted es administrador recuerde editar solo los datos que quiere 
+              editar
+            </p>
+          
+          </div>
+  
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <div class="card">
+              
+              <div class="card-body py-5 px-md-5">
+                
+                <form [formGroup]="form" (ngSubmit)="crear()" class="mx-1 mx-md-4">
+  
+                  <div class="form-outline d-flex justify-content-center mb-4">
+                  <h4>Producto Nuevo</h4>
+                </div>
+                  
+                  <div class="form-outline mb-4">
+                    <input type="text" id="form3Example3"
+                    formControlName="name" class="form-control"  [class.is-invalid]="nameNoValido" />
+                    <label class="form-label" for="form3Example3">Nombre</label>
+                    <small *ngIf="nameNoValido" class="text-danger">
+                      Ingrese min. 4 letras
+                    </small>
+                  </div>
+                  <div class="form-outline mb-4">
+                    <input type="text" id="form"  formControlName="autor"
+                    [class.is-invalid]="imgNoValido" class="form-control" />
+                    <label class="form-label" >Autor</label>
+                    <small *ngIf="imgNoValido" class="text-danger">
+                      Recuerde Ingresar el Autor
+                    </small>
+                  </div>
+                  <div class="form-outline mb-4">
+                    <input type="text" id="form"  formControlName="img"
+                    [class.is-invalid]="autorNoValido" class="form-control" />
+                    <label class="form-label" >Url imagen</label>
+                    <small *ngIf="autorNoValido" class="text-danger">
+                      Recuerde Ingresar la Url
+                    </small>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <input type="text" id="form"  formControlName="min" 
+                        class="form-control" [class.is-invalid]="minNoValido"/>
+                        <label class="form-label" >Mínimo</label>
+                        <small *ngIf="minNoValido" class="text-danger">
+                          Recuerde Ingresar el mínimo
+                        </small>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <input type="text"  id="form"formControlName="max" 
+                        class="form-control" [class.is-invalid]="maxNoValido"/>
+                        <label class="form-label" >Máximo</label>
+                        <small *ngIf="maxNoValido" class="text-danger">
+                          Recuerde el maximo
+                        </small>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <input type="text" id="form"   formControlName="inInventory" 
+                        class="form-control" [class.is-invalid]="inInventoryNoValido"/>
+                        <label class="form-label" >En inventario</label>
+                        <small *ngIf="inInventoryNoValido" class="text-danger">
+                          Recuerde el inventario
+                        </small>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <input type="text" id="form3Example2" formControlName="state" 
+                        class="form-control" [class.is-invalid]="stateNoValido"/>
+                        <label class="form-label" for="form3Example2">Estado</label>
+                        <small *ngIf="stateNoValido" class="text-danger">
+                          Recuerde el estado
+                        </small>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <input type="text" id="form3Example2" formControlName="enabled" 
+                        class="form-control" [class.is-invalid]="enabledNoValido"/>
+                        <label class="form-label" for="form3Example2">Habilitado(Borrado lógico)</label>
+                        <small *ngIf="enabledNoValido" class="text-danger">
+                          Recuerde el habilitado
+                        </small>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <input type="text" id="form3Example2"  formControlName="price" 
+                        class="form-control" [class.is-invalid]="priceNoValido"/>
+                        <label class="form-label" for="form3Example2">Precio</label>
+                        <small *ngIf="priceNoValido" class="text-danger">
+                          Recuerde el precio
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+  
+  
+                  <!-- Submit button -->
+                  <div class="d-flex justify-content-center mb-4">
+                  <button type="submit"  class=" btn btn-primary btn-block mb-4">
+                    Editar
+                  </button>
+                </div>
+                 
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

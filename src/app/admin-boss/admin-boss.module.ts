@@ -6,6 +6,7 @@ import { ShoppingHistoryComponent } from './shopping-history/shopping-history.co
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { CreateProductComponent } from './create-product/create-product.component';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ManagementComponent,
     ShoppingHistoryComponent,
     EditProductComponent,
+    CreateProductComponent,
     
   ],
   imports: [

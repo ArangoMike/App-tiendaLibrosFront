@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
+import { CreateProductComponent } from "./create-product/create-product.component";
 import { EditProductComponent } from "./edit-product/edit-product.component";
 import { ManagementComponent } from "./management/management.component";
 import { ShoppingHistoryComponent } from "./shopping-history/shopping-history.component";
@@ -7,9 +8,9 @@ import { ShoppingHistoryComponent } from "./shopping-history/shopping-history.co
 
 
 
-
 const routes: Routes = [
    { path: 'management', component: ManagementComponent},
+   { path: 'create', component: CreateProductComponent},
    { path: 'shoppingHistory', component: ShoppingHistoryComponent},
    { path: 'edit/:id', component: EditProductComponent}
   ];

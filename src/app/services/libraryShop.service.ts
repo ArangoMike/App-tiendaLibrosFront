@@ -41,4 +41,12 @@ export class LibraryShopService {
     });
   }
 
+
+  createProduct(product:any):Observable<any>{
+    let direction = this.url +'create';
+    return this.http.post<any>(direction,product, {
+      responseType: 'text' as 'json',
+    });
+  }
+
 }
