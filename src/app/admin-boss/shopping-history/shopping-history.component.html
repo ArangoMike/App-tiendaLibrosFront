@@ -1,0 +1,54 @@
+<table class="table" >
+    
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Id tipo</th>
+        <th scope="col">Id cliente</th>
+        <th scope="col">Nombre cliente</th>
+        <th scope="col">Productos</th>
+      </tr>
+    </thead>
+    <tbody >
+      <tr  *ngFor="let purchase of purchases | paginate: { itemsPerPage: 11, currentPage: page }">
+        <th #{{purchase.id}} scope="row">{{purchase.id}}</th>
+        <td>{{purchase.date}}</td>
+        <td>{{purchase.idType}}</td>
+        <td>{{purchase.idClient}}</td>
+        <td>{{purchase.clientName}}</td>
+        <td> 
+          <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" [attr.data-bs-target]="'#a'+ purchase.id">
+  {{purchase.products.length}}
+</button>
+
+<!-- Modal -->
+<div class="modal fade" [attr.id]="'a'+purchase.id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-bg-primary">
+        <h5 class="modal-title text-bg-primary" id="exampleModalLabel"><i class="bi bi-bag "></i> Productos</h5>
+        <button type="button" class="btn-close btn-primary"  data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" *ngFor="let product of purchase.products">
+        <i class="bi bi-box2-heart-fill me-2"></i> ID: {{product.id}} |  cantidad: {{product.quantity}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+       
+      </div>
+    </div>
+  </div>
+</div>
+        </td>
+    
+      </tr>
+     
+    </tbody>
+  </table>
+ 
+  <pagination-controls class="d-flex" style="justify-content: center;" (pageChange)="page = $event"></pagination-controls>
+
+  
+  

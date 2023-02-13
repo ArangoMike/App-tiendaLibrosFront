@@ -9,6 +9,7 @@ import { LobbyComponent } from './pages/lobby/lobby.component';
 import { ShopComponent } from './pages/shop/shop.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ShoppingCartComponent } from './pages/shoppingCart/shoppingCart.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,9 @@ import { ShoppingCartComponent } from './pages/shoppingCart/shoppingCart.compone
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

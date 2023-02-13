@@ -1,4 +1,105 @@
-<app-navbar></app-navbar>
 
 
-<app-footer></app-footer>
+<section class="h-100 h-custom" style="background-color: #eee;">
+    <div class="container h-100 py-5">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col">
+          <div class="card shopping-cart" style="border-radius: 15px;">
+            <div class="card-body text-black">
+  
+              <div class="row">
+                <div class="col-lg-6 px-5 py-4">
+  
+                  <h3 class="mb-5 pt-2 text-center fw-bold text-uppercase">Tus Productos</h3>
+  
+                  <div class="d-flex align-items-center mb-5" *ngFor="let prod of products; let i = index">
+                    <div class="flex-shrink-0">
+                      <img src="{{prod.img}}"
+                        class="img-fluid" style="width: 150px;" alt="Generic placeholder image">
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                      <a href="/shoppingCart" (click)="removeProduct(prod.id)" class="float-end text-black"><i class="bi bi-trash3-fill"></i></a>
+                      <h5 class="text-primary">Título: {{prod.name}}</h5>
+                      <h6 style="color: #9e9e9e;">Autor: {{prod.autor}}</h6>
+
+                      <p style="color: #9e9e9e;">Compra maxima: {{prod.max}}</p>
+                      <div class="d-flex align-items-center">
+                        <p class="fw-bold mb-0 me-5 pe-3">${{prod.price}}</p>
+                        
+                        <div class="def-number-input number-input safari_only" >
+                          <button type="button" (click)="decrease(i)"
+                            class="minus"></button>
+                          <input class="quantity fw-bold text-black" placeholder="0" min="0" name="quantity" 
+                            type="number"  [(ngModel)]="cantidades[i]">
+                          <button type="button" (click)="increase(i)"
+                            class="plus"></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+  
+                  <hr class="mb-4" style="height: 2px; background-color: #1266f1; opacity: 1;">
+  
+                 
+  
+                </div>
+                <div class="col-lg-6 px-5 py-4">
+  
+                  <h3 class="mb-5 pt-2 text-center fw-bold text-uppercase">Datos Factura</h3>
+  
+                  <form class="mb-5" [formGroup]="form">
+  
+  
+                    <div class="form-outline mb-5">
+                      <input type="text"  placeholder="Nombre" class="form-control form-control-lg" formControlName="clientName"
+                        />
+                      <label class="form-label" for="typeName">Nombre completo</label>
+                    </div>
+  
+                    <div class="row">
+                      <div class="col-md-6 mb-5">
+                        <div class="form-outline">
+                          <input  type="text"  class="form-control form-control-lg" placeholder="CC - TI - PASPPORT" formControlName="idType"
+                            maxlength="8" />
+                          <label class="form-label" >Tipo Identificación</label>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-5">
+                        <div class="form-outline">
+                          <input type="text" class="form-control form-control-lg" placeholder="Número " formControlName="idClient"
+                              minlength="5"  />
+                          <label class="form-label" >Identificación</label>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <p class="mb-5">No se aceptan cambios ni reembolsos de libros ya abiertos<a
+                        href="/lobby">terminos y condiciones</a>.</p>
+  
+                   
+
+                    <hr class="mb-4" style="height: 2px; background-color: #1266f1; opacity: 1;">
+
+                    <div class="d-flex justify-content-between p-2 mb-2" style="background-color: #e1f5fe;">
+                      <h5 class="fw-bold mb-0">Total:  {{total | currency: 'COP'}}</h5>
+                      <h5 class="fw-bold mb-0"></h5>
+                    </div>
+                    
+                    <button type="submit" (click)="buy()" class="btn btn-primary btn-block btn-lg">Comprar</button>
+  
+                    <h5 class="fw-bold mb-5" style="position: absolute; bottom: 0;">
+                      <a href="/shop"><i class=" fa-angle-left me-2"></i>Seguir comprando</a>
+                    </h5>
+  
+                  </form>
+  
+                </div>
+              </div>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

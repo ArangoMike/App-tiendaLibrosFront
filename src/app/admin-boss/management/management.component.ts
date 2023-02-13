@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Product } from 'src/app/models/product';
-import { ProductToBuy } from 'src/app/models/productToBuy';
 import { Purchase } from 'src/app/models/purchase';
 import { LibraryShopService } from 'src/app/services/libraryShop.service';
 import { PurchaseService } from 'src/app/services/purchase.service';
 
 @Component({
-  selector: 'app-tienda',
-  templateUrl: './shop.component.html',
-  styleUrls: ['./shop.component.scss']
+  selector: 'app-management',
+  templateUrl: './management.component.html',
+  styleUrls: ['./management.component.scss']
 })
-export class ShopComponent implements OnInit{
+export class ManagementComponent {
 
   totalProducts: number = 0;
   i:number= 0;
@@ -19,8 +19,9 @@ export class ShopComponent implements OnInit{
   page: number = 0;
   pages: Array<number> | undefined;
 
-  constructor(private libraryService: LibraryShopService,private purchaseService: PurchaseService){
-  
+  constructor(private libraryService: LibraryShopService,
+    private purchaseService: PurchaseService,
+    private router: Router){
   }
 
   ngOnInit(): void {
@@ -41,14 +42,6 @@ export class ShopComponent implements OnInit{
       .getCountProducts()
       .subscribe((data) => (this.totalProducts = data));
   }
-
-  pushProduct(product:Product){
-    
-    sessionStorage.setItem(`${product.id}`,JSON.stringify(product))
-    this.purchaseService.myCart.next(sessionStorage.length);
-
-  }
-
 
   isLast(): boolean {
     let totalPages: any = this.pages?.length;
@@ -72,6 +65,9 @@ export class ShopComponent implements OnInit{
     this.getProducts();
   }
 
+editProduct(product:Product){
 
+this.router.navigate(['/admin/edit/'])
 
+}
 }

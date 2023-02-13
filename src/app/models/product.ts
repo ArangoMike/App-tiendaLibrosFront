@@ -11,4 +11,5 @@ export interface Product {
     img: string;
     state: boolean;
     price: number;
+    quantity: number;
 }

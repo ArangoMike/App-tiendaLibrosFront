@@ -7,5 +7,6 @@ export interface Purchase {
     idType?:string;
       idClient?:string;
       clientName?:string;
-     products:[ProductToBuy];
+     products:ProductToBuy[];
+     total:number;
 }

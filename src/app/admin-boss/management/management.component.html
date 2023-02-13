@@ -1,0 +1,80 @@
+
+
+<div class="body">
+    <br>
+    <div class="summary-questions container-lg">
+        <div>
+          <p class="text-start fs-1 mb-1 font1">Todos los Productos</p>
+          <p class="text-start fs-4 font2">{{ totalProducts }} Productos</p>
+        </div>
+      </div>
+    
+    
+      <div class="container">
+        <div class="product"  *ngFor="let product of products">
+          <div class="card mb-3 h-200" >
+            <div class="row g-0">
+              <div class="col-md-3">
+                <div class="answer" style="margin-left: 5px;">
+                  <br />
+                
+                  
+                  <div class="row"  >
+                    <img  src="{{product.img}}"  alt="" width="200" height="100">
+                   
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-9">
+                <div class="card-body">
+                  <p class="card-text">
+                    <small class="text-muted font1">Título:  {{product.name}} </small>
+                  </p>
+                  <p class="card-text">
+                    <small class="text-muted font1">maximo:  <strong>{{product.max}} </strong><strong>|</strong> minimo:  <strong>{{product.min}}</strong>  </small>
+                  </p>
+        
+                  <p class="card-text font1"> ${{product.price}}</p>
+                  <p class="text-muted">estado: {{product.state}} <strong>|</strong> habilitado: {{product.enabled}} </p>
+                  <p class="text-muted font1">En inventario: {{product.inInventory}} </p>
+                  <p class=" font1">
+                    <small class="text-muted"
+                      >Autor:  {{product.autor}} </small
+                    >
+                  </p>
+                  <div class="col-6">
+                    <button data-bs-toggle="modal"  [routerLink]="['/admin/edit/',product.id]" data-bs-target="#exampleModal" type="button"  class="btn btn-outline-primary position-relative"><i class="bi bi-pencil-square"></i> Editar
+                        </button>
+                        
+                </div> 
+                
+                  
+                </div>
+              </div>
+              
+            </div>
+          </div>
+          
+        </div>
+        <br>
+      </div>
+      
+        <ul class="pagination justify-content-center" >
+          <li class="page-item">
+            <a class="page-link" (click)="previousPage()" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item" *ngFor="let page of pages; let i = index">
+            <a class="page-link" (click)="getPage(i)">{{ i + 1 }}</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" (click)="nextPage()" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+     
+    </div>
+    
+    

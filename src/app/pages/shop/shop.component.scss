@@ -1,9 +1,34 @@
-.page-link{
-    cursor: pointer;
-  }
-  .container{
-    display: grid;
-    grid-template: repeat(3, 1fr) / repeat(3, 1fr);
-    gap: 1px 10px;
-    align-items: center;
-  }
+
+
+.body{
+  
+  background-attachment: fixed;
+    width: 100%;
+    background-image:  url(../../../assets/images/geometric-composition.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+
+    dl, ol, ul {
+      padding-bottom: 1em;
+      margin-top: 0;
+      margin-bottom: 0rem;
+    }
+
+    .page-link{
+      cursor: pointer;
+    }
+    .container{
+      display: grid; 
+    grid-template-columns: 1.4fr 1.4fr 1.4fr; 
+    grid-template-rows: 1fr 1fr; 
+    gap: 4px 10px; 
+    grid-template-areas: 
+      ". . ."
+      ". . ."; 
+    }
+    
+}
+
+

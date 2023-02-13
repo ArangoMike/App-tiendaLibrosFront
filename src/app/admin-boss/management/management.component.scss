@@ -1,0 +1,18 @@
+.page-link{
+    cursor: pointer;
+  }
+
+  .container{
+    display: grid; 
+  grid-template-columns: 1.4fr 1.4fr 1.4fr; 
+  grid-template-rows: 1fr 1fr; 
+  gap: 4px 10px; 
+  grid-template-areas: 
+    ". . ."
+    ". . ."; 
+
+    p {
+        margin-top: 0;
+        margin-bottom: 0rem;
+    }
+  }

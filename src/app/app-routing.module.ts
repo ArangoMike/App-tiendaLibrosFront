@@ -5,6 +5,7 @@ import { LobbyComponent } from './pages/lobby/lobby.component';
 import { ShopComponent } from './pages/shop/shop.component';
 
 const routes: Routes = [
+  { path: 'admin', loadChildren: () => import('./admin-boss/admin-boss.module').then(m => m.AdminBossModule)},
   { path: 'lobby', component: LobbyComponent},
   { path: 'shop', component: ShopComponent},
   { path: 'shoppingCart', component: ShoppingCartComponent},

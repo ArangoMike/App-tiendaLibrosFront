@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Product } from '../models/product';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { EventEmitter, Injectable, Output, } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { ProductToBuy } from '../models/productToBuy';
 import { Purchase } from '../models/purchase';
 
 @Injectable({
@@ -9,26 +9,30 @@ import { Purchase } from '../models/purchase';
 })
 export class PurchaseService {
 
-  private url: string = 'http://localhost:8080/';
+  myCart = new BehaviorSubject<Number>(new Number);
+  myCart$ = this.myCart.asObservable();
+
+  private url: string = 'http://localhost:9090/';
+
+   httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'text/plain'
+    })
+  };
 
   constructor(private http: HttpClient) { }
 
-  getPage(page: number): Observable<Product[]> {
-    let direction = this.url + 'getProductPaged/' + page;
-    return this.http.get<Product[]>(direction);
-  }
+savePurchase(purchase: Purchase): Observable<any>{
+let direction = this.url + 'create/';
+return this.http.post<any>(direction,purchase, {
+  responseType: 'text' as 'json',
+});
+}
 
-  getTotalPages(): Observable<number> {
-    let direction = this.url + 'totalPages';
-    return this.http.get<number>(direction);
-  }
-
-
-  getCountQuestions(): Observable<number> {
-    let direction = this.url + 'countProduct';
-    return this.http.get<number>(direction);
-  }
-
-
-
+getPurchases():Observable<Purchase[]>{
+  let direction = this.url + 'getAll/';
+  return this.http.get<Purchase[]>(direction);
+}
+  
 }
