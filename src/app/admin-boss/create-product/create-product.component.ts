@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { LibraryShopService } from 'src/app/services/libraryShop.service';
 
 @Component({
@@ -12,18 +13,18 @@ export class CreateProductComponent {
 
   product: any ;
   form!: FormGroup;
+  userT:any = '';
 
   constructor(private route: ActivatedRoute,
     private libraryService : LibraryShopService,
+    private cookieSvc: CookieService,
     private fb : FormBuilder,private router: Router){ this.crearFormulario() }
   
   ngOnInit(): void {
-   
+    this.userT =JSON.parse(this.cookieSvc.get('user'));
    console.log(this.product);
    
   }
-
-  
 
 
   crearFormulario(): void {
@@ -87,7 +88,7 @@ export class CreateProductComponent {
       // Aquí hago el consumo del api post
       const productEdit = this.form.value;
       
-     return this.libraryService.createProduct(productEdit).subscribe(
+     return this.libraryService.createProduct(productEdit,this.userT.data).subscribe(
         res => {
           alert('Producto Creado!')
           this.router.navigate(['/admin/management'])

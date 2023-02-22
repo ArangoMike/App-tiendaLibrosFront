@@ -12,7 +12,7 @@ export class PurchaseService {
   myCart = new BehaviorSubject<Number>(new Number);
   myCart$ = this.myCart.asObservable();
 
-  private url: string = 'http://localhost:9090/';
+  private url: string = 'http://localhost:8080/api/v1/purchase/';
 
    httpOptions = {
     headers: new HttpHeaders({
@@ -21,18 +21,30 @@ export class PurchaseService {
     })
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    
+   }
 
-savePurchase(purchase: Purchase): Observable<any>{
+savePurchase(purchase: Purchase,token: any): Observable<any>{
 let direction = this.url + 'create/';
 return this.http.post<any>(direction,purchase, {
   responseType: 'text' as 'json',
+  headers: {'Authorization': `Bearer ${token}`}
 });
 }
 
-getPurchases():Observable<Purchase[]>{
+getPurchases(token:any):Observable<Purchase[]>{
   let direction = this.url + 'getAll/';
-  return this.http.get<Purchase[]>(direction);
+  return this.http.get<Purchase[]>(direction,{
+    headers: {'Authorization': `Bearer ${token}`}
+  });
 }
   
+getPurchasesUser(token:any):Observable<Purchase[]>{
+  let direction = this.url + 'getAllByEmail/';
+  return this.http.get<Purchase[]>(direction,{
+    headers: {'Authorization': `Bearer ${token}`}
+  });
+}
+
 }

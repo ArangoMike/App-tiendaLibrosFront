@@ -15,7 +15,6 @@ import { CreateProductComponent } from './create-product/create-product.componen
     ShoppingHistoryComponent,
     EditProductComponent,
     CreateProductComponent,
-    
   ],
   imports: [
     CommonModule,

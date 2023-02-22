@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 import { Product } from 'src/app/models/product';
 import { LibraryShopService } from 'src/app/services/libraryShop.service';
@@ -14,23 +15,26 @@ export class EditProductComponent implements OnInit {
   
   idProduct!:string;
   product: any ;
+  userT:any = '';
   form!: FormGroup;
 
   constructor(private route: ActivatedRoute,
     private libraryService : LibraryShopService,
+    private cookieSvc: CookieService,
     private fb : FormBuilder,private router: Router){this.getProduct(); }
   
   ngOnInit(): void {
+    this.userT =JSON.parse(this.cookieSvc.get('user'));
    const idProduct = this.route.snapshot.paramMap.get('id');
    this.getProduct();
-   console.log(this.product);
+   console.log(this.userT);
    
   }
 
   
   getProduct(){
     let id = this.route.snapshot.paramMap.get('id')
-    this.libraryService.getProduct(id).subscribe(data =>{
+    this.libraryService.getProduct(id,this.userT.data).subscribe(data =>{
       this.product = data;
       this.crearFormulario()
     })
@@ -82,7 +86,6 @@ export class EditProductComponent implements OnInit {
 
   guardar() {
 
-
     if (this.form.invalid) {
       
        return Object.values(this.form.controls).forEach( control => {
@@ -93,7 +96,7 @@ export class EditProductComponent implements OnInit {
       // Aquí hago el consumo del api post
       const productEdit = this.form.value;
       
-     return this.libraryService.updateProduct(productEdit).subscribe(
+     return this.libraryService.updateProduct(productEdit,this.userT.data).subscribe(
         res => {
           alert('Producto Actualizado!')
           this.router.navigate(['/admin/management'])

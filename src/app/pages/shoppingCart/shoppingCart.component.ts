@@ -1,6 +1,7 @@
+import { JsonPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { map } from 'rxjs/internal/operators/map';
+import { CookieService } from 'ngx-cookie-service';
 import { Product } from 'src/app/models/product';
 import { ProductToBuy } from 'src/app/models/productToBuy';
 import { Purchase } from 'src/app/models/purchase';
@@ -14,6 +15,7 @@ import { PurchaseService } from 'src/app/services/purchase.service';
 export class ShoppingCartComponent implements OnInit {
 
   products: Product[] = [];
+  userT:any = '';
   total:number = 0;
   cantidades:number[]= Array(this.products.length).fill(1);
   productTobuys: ProductToBuy[] = [];
@@ -23,27 +25,26 @@ export class ShoppingCartComponent implements OnInit {
   purchaseFinal!: Purchase;
   product: any;
   form!: FormGroup;
-  constructor(private purchaseService: PurchaseService, private fb: FormBuilder) {
+  constructor(private purchaseService: PurchaseService,
+     private fb: FormBuilder, private cookieSvc: CookieService) {
 
-  
     this.goproducts();
     this.crearForm();
    
-
   }
   
   ngOnInit(): void {
-   
 
-    
-this.crearForm();
+   this.userT = JSON.parse(this.cookieSvc.get('user'));  
+   this.crearForm();
   }
 
   crearForm(): void {
     this.form = this.fb.group({
       idType: ['', [Validators.required, Validators.minLength(2)]],
       idClient: ['', [Validators.required, Validators.minLength(5)]],
-      clientName: ['', [Validators.required, Validators.minLength(4)]]
+      clientName: ['', [Validators.required, Validators.minLength(4)]],
+      email: ['', [Validators.required, Validators.email]]
     });
   }
 
@@ -86,21 +87,23 @@ this.crearForm();
       clientName: user.clientName,
       idType: user.idType,
       idClient: user.idClient,
+      email: user.email,
       products: this.productTobuys,
       total: this.total
     }
 
-     this.purchaseService.savePurchase(this.purchaseFinal)
+     this.purchaseService.savePurchase(this.purchaseFinal,this.userT.data)
   .subscribe({next: (res) => {
-
-    alert(`Compra con #id: ${res} por valor de: $${this.total} hecha satisfactoriamente.`)
-    console.log('Compra con #id:',res, ' Por valor de: $ ', this.total, 'hecha satisfactoriamente');
-
+    
+    var newRes =JSON.parse(res)
+  
+    alert(`Compra con #id: ${newRes.data} por valor de: $${this.total} hecha satisfactoriamente.`)
+   
     sessionStorage.clear();
 
-    // setTimeout(() => {
-    //   window.location.reload();  
-    // }, 4000);
+     setTimeout(() => {
+       window.location.reload();  
+     }, 5000);
   } ,
   error: (e) =>{
     alert("Compra fallida, rectifica todos tus datos y cantidades disponibles.")

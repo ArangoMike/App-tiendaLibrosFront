@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { Product } from 'src/app/models/product';
 import { ProductToBuy } from 'src/app/models/productToBuy';
 import { Purchase } from 'src/app/models/purchase';
@@ -13,40 +14,44 @@ import { PurchaseService } from 'src/app/services/purchase.service';
 export class ShopComponent implements OnInit{
 
   totalProducts: number = 0;
+  userT:any = '';
   i:number= 0;
   purchase!: Purchase;
   products: Product[] | undefined;
   page: number = 0;
   pages: Array<number> | undefined;
 
-  constructor(private libraryService: LibraryShopService,private purchaseService: PurchaseService){
-  
+  constructor(private libraryService: LibraryShopService,
+    private cookieSvc: CookieService,
+    private purchaseService: PurchaseService){
+      
   }
 
   ngOnInit(): void {
+    var us = this.cookieSvc.get('user');
+    this.userT = JSON.parse(us!);
     this.getProducts();
+    console.log(this.userT);
     
   }
-
   
   getProducts(): void { 
    
-    this.libraryService.getPage(this.page).subscribe((data) => {
+    this.libraryService.getPage(this.page,this.userT.data).subscribe((data) => {
         this.products = data;
     });
     this.libraryService
-      .getTotalPages()
+      .getTotalPages(this.userT.data)
       .subscribe((data) => (this.pages = new Array(data)));
     this.libraryService
-      .getCountProducts()
+      .getCountProducts(this.userT.data)
       .subscribe((data) => (this.totalProducts = data));
   }
 
   pushProduct(product:Product){
     
-    sessionStorage.setItem(`${product.id}`,JSON.stringify(product))
+    sessionStorage.setItem(`${product.id}`,JSON.stringify(product)) 
     this.purchaseService.myCart.next(sessionStorage.length);
-
   }
 
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { PurchaseService } from './services/purchase.service';
 
 @Component({
@@ -12,6 +13,8 @@ export class AppComponent implements OnInit{
 
 
   ngOnInit(): void {
+
+
     this.purchaseService.myCart.next(sessionStorage.length);
   }
   title = 'Front-TiendaLibros';

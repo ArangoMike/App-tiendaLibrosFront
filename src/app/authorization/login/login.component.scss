@@ -1,0 +1,19 @@
+
+
+
+.body{
+  
+    background-attachment: fixed;
+    min-height: 50vh!important ;
+      width: 100%;
+      background-image:  url(../../../assets/images/janko-ferlic-sfL_QOnmy00-unsplash.jpg);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
+      background-size: cover;
+
+      .card-body{
+        max-height: 70vh;
+       
+      }
+}

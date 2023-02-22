@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { Product } from 'src/app/models/product';
 import { Purchase } from 'src/app/models/purchase';
 import { LibraryShopService } from 'src/app/services/libraryShop.service';
@@ -13,6 +14,7 @@ import { PurchaseService } from 'src/app/services/purchase.service';
 export class ManagementComponent {
 
   totalProducts: number = 0;
+  userT:any = '';
   i:number= 0;
   purchase!: Purchase;
   products: Product[] | undefined;
@@ -21,25 +23,28 @@ export class ManagementComponent {
 
   constructor(private libraryService: LibraryShopService,
     private purchaseService: PurchaseService,
+    private cookieSvc: CookieService,
     private router: Router){
   }
 
   ngOnInit(): void {
-    this.getProducts();
+    this.userT =JSON.parse(this.cookieSvc.get('user'));
+    console.log(this.userT);
     
+    this.getProducts();   
   }
 
   
   getProducts(): void { 
    
-    this.libraryService.getPage(this.page).subscribe((data) => {
+    this.libraryService.getPage(this.page,this.userT.data).subscribe((data) => {
         this.products = data;
     });
     this.libraryService
-      .getTotalPages()
+      .getTotalPages(this.userT.data)
       .subscribe((data) => (this.pages = new Array(data)));
     this.libraryService
-      .getCountProducts()
+      .getCountProducts(this.userT.data)
       .subscribe((data) => (this.totalProducts = data));
   }
 

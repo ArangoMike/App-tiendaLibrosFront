@@ -1,0 +1,59 @@
+<section class="body  gradient-custom">
+    <div class="container py-5 h-50">
+      <div class="row d-flex justify-content-center align-items-center h-50">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card bg-dark text-white" style="border-radius: 1rem;">
+            <div class=" card-body ps-5 pe-5 text-center">
+                <form [formGroup]="form" (ngSubmit)="guardar()" >
+              <div class=" mb-md-3 mt-md-1 " >
+               
+                <h2 class="fw-bold mb-2 text-uppercase">Registro</h2>
+                <p class="text-white-50 mb-3">Porfavor ingrese los siguientes datos!</p>
+  
+                <div class="form-outline form-white mb-3">
+                  <input type="email"  class="form-control form-control-lg" 
+                  formControlName="email"  [class.is-invalid]="emailNoValido" />
+                  <small *ngIf="emailNoValido" class="text-danger">
+                    Ingrese un correo valido
+                  </small>
+                  <label class="form-label" for="typeEmailX">Email</label>
+                </div>
+                <div class="form-outline form-white mb-3">
+                  <input type="text"  class="form-control form-control-lg" 
+                  formControlName="name"  [class.is-invalid]="nameNoValido" />
+                  <small *ngIf="nameNoValido" class="text-danger">
+                    Ingrese minimo 4 letras
+                  </small>
+                  <label class="form-label" for="typeEmailX">Name</label>
+                </div>
+  
+                <div class="form-outline form-white mb-3">
+                  <input type="password" id="typePasswordX" class="form-control form-control-lg" 
+                  formControlName="password"  [class.is-invalid]="passNoValido" />
+                  <small *ngIf="passNoValido" class="text-danger">
+                    Ingrese una contraseña valida y que coincidan
+                  </small>
+                  <label class="form-label" for="typePasswordX">Password</label>
+                </div>
+                <div class="form-outline form-white mb-3">
+                  <input type="password" id="typePasswordX" class="form-control form-control-lg" 
+                  formControlName="password1" [class.is-invalid]="passNoValido" />
+                  <small *ngIf="passNoValido" class="text-danger">
+                    Ingrese una contraseña valida y que coincidan
+                  </small>
+                  <label class="form-label" for="typePasswordX">Password</label>
+                </div>
+  
+                <button class="btn btn-outline-light btn-lg px-5" type="submit">Registrar</button>
+              </div>
+            </form>
+          
+                <p class="mb-0">Ya tienes cuenta? <a href="/login" class="text-white-50 fw-bold">Login</a>
+                </p>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
